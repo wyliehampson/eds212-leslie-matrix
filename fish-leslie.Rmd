@@ -1,0 +1,58 @@
+---
+title: "Leslie matrix example"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+A population of fish we're interested in has four life stages: eggs (E), fry (F), juvenile (J), breeding adult (A). You are given the following:
+
+- Each breeding adult will produce, on average, 600 eggs
+- 25% of eggs will survive to become fry
+- 10% of fry will survive to become juveniles
+- 40% of juveniles will survive to become adults
+- Adult survival rate year to year is 80%
+
+### Create the matrix
+
+```{r}
+# Make the Leslie Matrix:
+fish_leslie <- matrix(c(0, 0, 0, 600, 0.25, 0, 0, 0, 0, 0.10, 0, 0, 0, 0, 0.4, 0.8), nrow = 4, ncol = 4, byrow = TRUE)
+
+# Check it out: 
+fish_leslie
+```
+
+### Set the initial population structure
+
+Initial population (Year 0): 0 eggs, 40,000 fry, 600 juveniles, and 450 adults.
+
+```{r}
+# Initial population structure (R, F, J, A): 
+fish_year0 <- c(0, 40000, 600, 450)
+```
+
+### Project over several years 
+
+```{r}
+# Population structure in year 1:
+fish_year1 <- fish_leslie %*% fish_year0
+fish_year1
+
+# Population structure in year 2: 
+fish_year2 <- fish_leslie %*% fish_year1
+fish_year2
+
+# Population structure in year 3: 
+fish_year3 <- fish_leslie %*% fish_year2
+fish_year3
+
+## ADD YOUR CODE TO PROJECT FOR YEARS 4, 5 & 6 HERE:
+
+
+```
+
